@@ -1,0 +1,29 @@
+run:
+  skip-dirs: # 设置要忽略的目录
+    - util
+    - .*~
+  skip-files: # 设置不需要检查的go源码文件，支持正则匹配，这里建议包括：_test.go
+    - ".*\\.my\\.go$"
+    - _test.go
+linters-settings:
+  errcheck:
+    check-type-assertions: true # 这里建议设置为true，如果确实不需要检查，可以写成`num, _ := strconv.Atoi(numStr)`
+    check-blank: false
+  gci:
+    # 将以`github.com/joeyscat/mongoman`开头的包放在第三方包后面
+    local-prefixes: github.com/joeyscat/mongoman
+  godox:
+    keywords: # 建议设置为BUG、FIXME、OPTIMIZE、HACK
+      - BUG
+      - FIXME
+      - OPTIMIZE
+      - HACK
+  goimports:
+    # 设置哪些包放在第三方包后面，可以设置多个包，逗号隔开
+    local-prefixes: github.com/joeyscat/mongoman
+  gomoddirectives: # 设置允许在go.mod中replace的包
+    replace-local: true
+    replace-allow-list:
+      - github.com/coreos/etcd
+      - google.golang.org/grpc
+
