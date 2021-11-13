@@ -24,6 +24,7 @@ package cmd
 import (
 	icmd "github.com/joeyscat/mongoman/internal/cmd"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // userListCmd represents the userList command
@@ -35,6 +36,9 @@ var userListCmd = &cobra.Command{
 Example:
   mongoman user list --uri mongodb://test_01:123456@127.0.0.1:27017/test`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if uri == "" {
+			uri = viper.GetString("uri")
+		}
 		icmd.ListUsers(uri, dbname)
 	},
 }

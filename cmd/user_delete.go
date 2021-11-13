@@ -24,6 +24,7 @@ package cmd
 import (
 	icmd "github.com/joeyscat/mongoman/internal/cmd"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // userDeleteCmd represents the userDelete command
@@ -35,6 +36,9 @@ var userDeleteCmd = &cobra.Command{
 Examples:
   mongoman user delete --uri mongodb://test_01:123456@127.0.0.1:27017/test --username test_03`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if uri == "" {
+			uri = viper.GetString("uri")
+		}
 		icmd.DeleteUser(username, uri, dbname)
 	},
 }

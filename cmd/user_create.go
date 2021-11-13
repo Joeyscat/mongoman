@@ -24,6 +24,7 @@ package cmd
 import (
 	icmd "github.com/joeyscat/mongoman/internal/cmd"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var password string
@@ -38,6 +39,9 @@ var userCreateCmd = &cobra.Command{
 Example:
 mongoman user create --uri mongodb://test_01:123456@127.0.0.1:27017/test --roles readWrite:test, --username test_03 --password 123456`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if uri == "" {
+			uri = viper.GetString("uri")
+		}
 		icmd.CreateUser(username, password, roles, uri, dbname)
 	},
 }

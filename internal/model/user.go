@@ -4,8 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strings"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Role struct {
@@ -62,7 +60,7 @@ func ParseRolesFromStr(s string) ([]*Role, error) {
 }
 
 type User struct {
-	primitive.ObjectID `bson:"_id"`
+	// primitive.ObjectID `bson:"_id"`
 	// UserID             string   `bson:"userId"`
 	User       string   `bson:"user"`
 	DB         string   `bson:"db"`

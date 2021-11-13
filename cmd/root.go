@@ -61,7 +61,9 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.mongoman.yaml)")
 	rootCmd.PersistentFlags().StringVar(&uri, "uri", "", "mongodb uri")
+	viper.BindPFlag("uri", rootCmd.PersistentFlags().Lookup("uri"))
 	rootCmd.PersistentFlags().StringVar(&dbname, "dbname", "", "database name")
+	viper.BindPFlag("dbname", rootCmd.PersistentFlags().Lookup("dbname"))
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
